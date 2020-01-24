@@ -49,7 +49,7 @@ while True:
             if user_input in alphabets:
                 break
             else:
-                print(user_input, "is not a letter or '-' symbol ")
+                print(user_input, "is not a letter nor '-' symbol ")
                 print()
                 print(*printable)
                 continue
