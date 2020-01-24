@@ -1,10 +1,12 @@
 from random import randrange
 
+
 word = None
 printable = []
 guesses = 0
 corrects = set()
 missed = set()
+# finnish words bacause I'm lazy to translate these..
 hangintree = ('koroke', 'pystypuu', 'tukirauta', 'poikkipuu', 'köysi', 'pää', 'torso', 'kädet', 'jalat')
 used_words = []
 
@@ -65,7 +67,7 @@ def guess():
     """
     while True:
         user_input = input("Guess a letter: ").lower()
-        if len(user_input) == 1 and user_input.isalpha() or user_input == '-':
+        if len(user_input) >= 1 and user_input.isalpha() or user_input == '-':
             if user_input not in corrects and user_input not in missed:
                 return user_input
 
