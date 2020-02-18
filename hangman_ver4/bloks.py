@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+This class is created by Tiina Ferm
+"""
+
 from abc import ABC, abstractmethod
 from tkinter import ttk
 
