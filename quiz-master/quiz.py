@@ -3,24 +3,25 @@ from random import sample
 
 
 class Quiz:
-    def __init__(self, category='geo'):
-        self.usedQuestions = []
+    def __init__(self, category):
         self.questionToAsk = 0
+        self.loaded_game_question = 0
         self.questions = self.get_random_questions(category)
         self.answers = self.get_answers(self.questions)
         self.ansForQuestion = []
         self.corrects = 0
         self.get_answers_for_question(self.questionToAsk)
+        self.result_map = {}
 
-
-    def get_random_questions(self, category):
+    @staticmethod
+    def get_random_questions(category):
         f = FileHandler()
         questions = f.read_questions(category)
         random_questions = sample(questions, 15)
-        self.usedQuestions.extend(random_questions)
         return random_questions
 
-    def get_answers(self, questions):
+    @staticmethod
+    def get_answers(questions):
         f = FileHandler()
         answers = []
         for q in questions:
@@ -46,12 +47,3 @@ class Quiz:
                 if answer.get_question_number() == num:
                     answers.append(answer)
         self.ansForQuestion = answers
-
-
-
-
-
-if __name__ == '__main__':
-    q = Quiz()
-    print(q.ask_question())
-    print(q.get_answers_for_question(q.questionToAsk)[3].get_text())

@@ -1,12 +1,14 @@
-from question import Question
-from answer import Answer
+from q_a import Question, Answer
+import pickle
 
 
 class FileHandler:
     def __init__(self):
-        self.db_path = "db/"
+        self.db_path = 'db/'
+        self.save_path = self.db_path + 'games/'
         self.questions = '_questions.dat'
         self.answers = '_answers.dat'
+        self.game_file = 'quiz.dat'
 
     def read_questions(self, category):
         filename = category + self.questions
@@ -42,8 +44,15 @@ class FileHandler:
         file.close()
         return tuple(answers)
 
+    def serialize(self, quiz_object):
+        with open(self.save_path + self.game_file, 'bw+') as file:
+            pickle.dump(quiz_object, file)
+        if file is not None:
+            file.close()
 
-if __name__ == '__main__':
-    f = FileHandler()
-    i = f.read_answers('geo',1)[0].text
-    print(i)
+    def deserialize(self):
+        with open(self.save_path + self.game_file, 'br') as file:
+            quiz = pickle.load(file)
+            if quiz is not None:
+                return quiz
+            return None
